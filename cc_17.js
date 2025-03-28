@@ -52,4 +52,31 @@ const salesRep = new SalesRep("Bobby Brown");
 salesRep.addClient(customer1);
 console.log(`Sales Rep: ${salesRep.name}, Client Total: $${salesRep.getClientTotal("Jerry White")}`); // Sales Rep: Bobby Brown, Client Total: $300
 
+// Task 4: Build a Client Report System
+const customer2 = new Customer("Melissa Adams", "melissaa@gmail.com");// adding new client
+customer2.addPurchase(150); // adding purchase
+
+const customer3 = new VIPCustomer("Bobby Flay", "bobbyf@gmail.com" ,"Gold");// adding new client
+customer3.addPurchase(500);// adding purchase
+
+salesRep.addClient(customer2);// adding client to sales rep
+salesRep.addClient(customer3);// adding client to sales rep
+
+const allCustomers = [customer1, customer2, customer3,vipCustomer];// List of all customers
+
+const totalRevenue = allCustomers.reduce((total, customer) => total + customer.getTotalSpent(), 0);// Calculate total revenue
+console.log(`Total Revenue: $${totalRevenue}`); // Total Revenue: $1660
+
+const highestSpender = allCustomers.filter(customer => customer.getTotalSpent() > 500);// Filter customers who spent more than $500
+console.log("Highest Spenders:", highestSpender.map(customer => customer.name));// Highest Spenders: [ 'Post Malone', 'Bobby Flay' ]
+
+const customerReport = allCustomers.map(customer => ({
+    name: customer.name,
+    totalSpent: customer.getTotalSpent(),
+}));// Create a report of all customers
+console.log("Customer Report:", customerReport);// Customer Report: [ { name: 'Jerry White', totalSpent: 300 }, { name: 'Melissa Adams', totalSpent: 150 }, { name: 'Bobby Flay', totalSpent: 550 }, {name:'Post Malone', totalSpent: 660 } ]
+
+
+
+
 
